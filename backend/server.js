@@ -14,7 +14,8 @@ app.post('/tickets', (req, res) => {
     const code  = require('crypto').randomBytes(4).toString('hex');
     const stmt = db.prepare('INSERT INTO tickets (code) VALUES (?)');
     stmt.run(code);
-    res.json({ code });
+    const ticket = db.prepare('SELECT * FROM tickets WHERE code = ?').get(code);
+    res.json(ticket);
 })
 
 app.post('/tickets/:code/use', (req, res) => {
@@ -30,7 +31,8 @@ app.post('/tickets/:code/use', (req, res) => {
   }
   const stmt = db.prepare('UPDATE tickets SET used = 1 WHERE code = ?');
   stmt.run(code);
-  res.json({ message: 'Ticket used successfully' });
+    const updatedTicket = db.prepare('SELECT * FROM tickets WHERE code = ?').get(code);
+    res.json(updatedTicket);
 })
 
 app.delete('/tickets/:code', (req, res) => {
