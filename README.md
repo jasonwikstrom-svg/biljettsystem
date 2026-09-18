@@ -33,7 +33,7 @@ Tabell `tickets`:
 | created_at  | TEXT    | Timestamp when the ticket was created |
 | used        | INTEGER | 0 = unused, 1 = used                  |
 
-![Databasdesign](database-design.png)
+![Databasdesign](database-design-v2.png)
 
 ---
 
